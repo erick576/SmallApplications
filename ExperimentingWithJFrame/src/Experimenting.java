@@ -4,21 +4,22 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
-import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Label;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import javax.swing.ButtonGroup;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Experimenting extends Canvas{
-    private static int Aboxes = 1;
-    private static int Bboxes = 5;
+    private static int Aboxes = 0;
+    private static int Bboxes = 0;
 	private JFrame frame;
 	private JTextField txtVennDiagram;
 	private JTextField textField;
@@ -33,6 +34,7 @@ public class Experimenting extends Canvas{
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private Drawing canvas2;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 	/**
 	 * Launch the application.
 	 */
@@ -106,6 +108,7 @@ public class Experimenting extends Canvas{
 		frame.getContentPane().add(lblAOrB);
 		
 		JButton btnSubmit = new JButton("Submit");
+		buttonGroup.add(btnSubmit);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			String input; String side;
@@ -118,39 +121,39 @@ public class Experimenting extends Canvas{
 			if(Character.toLowerCase(side.charAt(0)) == Character.toLowerCase('A')) {Aboxes ++;}
 			if(Character.toLowerCase(side.charAt(0)) == Character.toLowerCase('B')) {Bboxes ++;}
 		
-			if(Aboxes == 2 && textField_2.isEditable()) {
+			if(Aboxes == 1 && textField_2.isEditable()) {
 			textField_2.setText(input);
 			textField_2.setEditable(false);
 			}
-			if(Aboxes == 3 && textField_3.isEditable()) {
+			if(Aboxes == 2 && textField_3.isEditable()) {
 			textField_3.setText(input);
 			textField_3.setEditable(false);
 			}
-			if(Aboxes == 4 && textField_4.isEditable()) {
+			if(Aboxes == 3 && textField_4.isEditable()) {
 			textField_4.setText(input);
 			textField_4.setEditable(false);
 			}
-			if(Aboxes == 5 && textField_5.isEditable()) {
+			if(Aboxes == 4 && textField_5.isEditable()) {
 			textField_5.setText(input);
 			textField_5.setEditable(false);
 			}
-			if(Bboxes == 6 && textField_6.isEditable()) {
+			if(Bboxes == 1 && textField_6.isEditable()) {
 			textField_6.setText(input);
 			textField_6.setEditable(false);
 			}
-			if(Bboxes == 7 && textField_7.isEditable()) {
+			if(Bboxes == 2 && textField_7.isEditable()) {
 			textField_7.setText(input);
 			textField_7.setEditable(false);
 			}
-			if(Bboxes == 8 && textField_8.isEditable()) {
+			if(Bboxes == 3 && textField_8.isEditable()) {
 			textField_8.setText(input);
 			textField_8.setEditable(false);
 			}
-			if(Bboxes == 9 && textField_9.isEditable()) {
+			if(Bboxes == 4 && textField_9.isEditable()) {
 			textField_9.setText(input);
 			textField_9.setEditable(false);
 			}
-			if(Bboxes == 10 && textField_10.isEditable()) {
+			if(Bboxes == 5 && textField_10.isEditable()) {
 			textField_10.setText(input);
 			textField_10.setEditable(false);
 			}
@@ -242,6 +245,32 @@ public class Experimenting extends Canvas{
         canvas2.setBackground(new Color(255, 255, 255, 80));
         canvas2.setBounds(228, 270, 301, 303);
         frame.getContentPane().add(canvas2);
+        
+        JButton btnDone = new JButton("Done?");
+        btnDone.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	
+        	Satistics newFrame = new Satistics();	
+        	newFrame.pack();
+        	newFrame.setLocationRelativeTo(null);
+        	newFrame.setVisible(true);
+        	newFrame.setBounds(252, 111, 390, 159);
+        	String s = "A: " + Aboxes + "\n" + "B: " + Bboxes;
+            newFrame.textField.setText(s);
+            newFrame.textField.setEditable(false);
+
+        	
+        	}
+        });
+        btnDone.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		
+        	}
+        });
+        btnDone.setFont(new Font("Calibri", Font.BOLD, 16));
+        btnDone.setBounds(1081, 569, 140, 41);
+        frame.getContentPane().add(btnDone);
  
         
         
